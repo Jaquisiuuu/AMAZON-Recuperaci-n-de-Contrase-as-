@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Recuperar Contraseña</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #a8e0f8, #f8b5b5);
+        }
+
+        header {
+            width: 100%;
+            height: 100px;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        main {
+            margin-top: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        input {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 95%;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #357ae8;
+        }
+
+        .message {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .terms-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .terms-container label {
+            color: #555;
+        }
+
+        .terms-container a {
+            color: #4285f4;
+            text-decoration: none;
+        }
+
+        .terms-container a:hover {
+            text-decoration: underline;
+        }
+
+        .loading-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #4285f4;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="background"></canvas>
+    <header>
+        <h1>Recuperar Contraseña</h1>
+    </header>
+
+    <main>
+        <form id="recover-form" onsubmit="recoverPassword(event)">
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" required placeholder="Ingresa tu correo">
+
+            <!-- Pregunta de Seguridad -->
+            <label for="security-question">Respuesta a la pregunta de seguridad:</label>
+            <input type="text" id="security-question" required placeholder="Respuesta a la pregunta de seguridad">
+
+            <button type="submit">Recuperar Contraseña</button>
+
+            <div class="terms-container">
+                <label>
+                    <a href="login.html">¿Ya tienes cuenta? Iniciar sesión</a>
+                </label>
+            </div>
+        </form>
+
+        <div id="message" class="message"></div>
+    </main>
+
+    <div id="loading-message" class="loading-message" style="display: none;">
+        <div class="spinner"></div>
+        <p>Enviando instrucciones...</p>
+    </div>
+
+    <script>
+        // Función para manejar la recuperación de la contraseña
+        function recoverPassword(event) {
+            event.preventDefault(); // Evita el envío del formulario
+
+            const email = document.getElementById('email').value.trim();
+            const securityAnswer = document.getElementById('security-question').value.trim();
+            const messageElement = document.getElementById('message');
+
+            // Obtener los datos guardados del almacenamiento local
+            const storedEmail = localStorage.getItem('userEmail');
+            const storedSecurityAnswer = localStorage.getItem('userSecurityAnswer'); // La respuesta a la pregunta
+
+            // Depuración: Verificar los datos recuperados
+            console.log("Correo ingresado:", email);
+            console.log("Correo almacenado:", storedEmail);
+            console.log("Respuesta ingresada:", securityAnswer);
+            console.log("Respuesta almacenada:", storedSecurityAnswer);
+
+            // Validar que el correo y la respuesta sean correctos
+            if (email !== storedEmail) {
+                messageElement.innerText = "Correo electrónico no encontrado.";
+                messageElement.style.color = "red";
+                return;
+            }
+
+            if (securityAnswer !== storedSecurityAnswer) {
+                messageElement.innerText = "Respuesta incorrecta a la pregunta de seguridad.";
+                messageElement.style.color = "red";
+                return;
+            }
+
+            // Mostrar mensaje de carga
+            document.getElementById('loading-message').style.display = 'block';
+
+            // Simulación de recuperación
+            setTimeout(() => {
+                document.getElementById('loading-message').style.display = 'none';
+                messageElement.innerText = "La verificación fue exitosa. Ahora puedes cambiar tu contraseña.";
+                messageElement.style.color = "green"; // Mensaje de éxito
+
+                // Redirigir a la página de cambio de contraseña
+                setTimeout(() => {
+                    window.location.href = 'cambiar-contraseña.html';
+                }, 2000); // 2 segundos para mostrar el mensaje
+            }, 2000); // Simula un retraso de 2 segundos
+        }
+    </script>
+</body>
+</html>

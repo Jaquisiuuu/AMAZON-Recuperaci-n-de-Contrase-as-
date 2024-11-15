@@ -1,0 +1,1089 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página de ofertas de Amazon.">
+    <title>Amazon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+       
+
+        
+
+       
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        
+
+.banner { 
+    background: linear-gradient(to top, rgba(240, 240, 240, 0.1), #3f77b0 70%); /* Primer color de fondo */
+    width: 100%; /* Abarca todo el ancho */
+    height: 350px; /* Ajusta la altura según tus necesidades */
+    position: relative; /* Mantiene el flujo del documento */
+    z-index: 0; /* Asegúrate de que esté por detrás de la navegación */
+    overflow: hidden; /* Evita que el contenido sobresalga */
+    transition: background 2s ease; /* Transición suave para el fondo */
+}
+
+
+
+
+.banner h2 {
+    padding:5px 0; /* Añade espacio interno arriba y abajo */
+	 padding-left: 200px; /* Añade espacio interno a la izquierda */
+    font-size: 3.5rem;
+    font-weight: bold;
+    position: relative; 
+    z-index: 1;
+ font-family: 'Roboto', sans-serif; /* Cambia 'Roboto' por la fuente que elijas */
+}
+.banner p {
+    margin: 0; /* Eliminar márgenes */
+    padding-left: 400px; /* Añade espacio interno a la izquierda */
+    font-size: 2rem;
+    position: relative; /* Para asegurarte de que se mantenga en el flujo */
+    z-index: 1; /* Para que el texto esté encima del fondo */
+    transform: translateY(-38px); /* Mueve el texto 10px hacia arriba */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.banner p + .discount-button { /* Espacio específico antes del botón */
+    margin-top: 15px; /* Ajusta aquí para más o menos espacio */
+}
+
+.discount-button {
+
+    background-color: #1f4f7c;
+    color: white;
+    border: none;
+    border-radius: 28px; /* Bordes más redondeados */
+    padding: 15px 30px; /* Más espacio interno */
+    cursor: pointer;
+    font-size: 1.2rem; /* Aumenta el tamaño del texto */
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Añadir transformación y sombra */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+margin-left: 380px; /* Ajusta este valor para mover el botón a la derecha */
+ transform: translateY(-30px);
+ font-family: 'Roboto', sans-serif; /* Cambia 'Roboto' por la fuente que elijas */
+}
+
+.discount-button:hover {
+    background-color: white;
+        transform: translateY(-35px);  /* Efecto de elevarse al pasar el mouse */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Aumentar la sombra al pasar el mouse */
+background-color: white; /* Fondo blanco */
+    color: #1f4f7c; /* Texto verde */
+    border: 2px solid #1f4f7c; /* Borde verde */
+}
+
+/* Estilos para la imagen del banner */
+.banner-image {
+    position: absolute; /* Permite mover la imagen dentro del banner */
+    right: 230px; /* Ajusta la distancia desde el lado derecho */
+    bottom: 20px; /* Ajusta la distancia desde el fondo */
+    max-width: 400px; /* Ajusta el tamaño de la imagen */
+    height: auto; /* Mantiene la proporción */
+    z-index: 1; /* Para que la imagen esté encima del fondo */
+ transform: translateY(-50px);
+}
+
+
+.navigation {
+    display: flex;
+    justify-content: center; /* Centra los recuadros */
+    padding: 1rem;
+    background-color: #f0f0f0; /* Fondo blanco */
+    z-index: 1;
+    gap: 20px; /* Espacio pequeño entre los recuadros */
+}
+
+.nav-box {
+
+    background-color: #d9dbdc; /* Color de fondo del recuadro */
+    color:black;
+    border-radius: 5px;
+    padding: 1rem; /* Ajustado para mejor apariencia */
+    text-align: center;
+    width: 150px; /* Ajusta el ancho como desees */
+    min-height: 120px; /* Altura mínima específica para contener el contenido */
+    transition: background-color 0.3s, transform 0.3s;
+    display: flex;
+    flex-direction: column; /* Permite apilar el contenido verticalmente */
+    justify-content: center; /* Centra el contenido verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    overflow: hidden; /* Evita que el contenido se desborde */
+     margin: 0 10px; /* Ajusta este valor para la separación horizontal */
+}
+
+.nav-box:hover {
+    background-color: #3095a9; /* Color al pasar el mouse */
+    color: black;
+    transform: translateY(-5px); /* Efecto de elevar el recuadro */
+}
+
+.nav-box h3 {
+    margin: 0;
+    padding: 0.3rem 0;
+}
+
+.nav-box p {
+    margin: 0; /* Eliminar márgenes */
+    padding: 0.5rem 0; /* Espacio interno */
+ cursor: pointer;
+    transition: color 0.3s; /* Transición suave para el color */
+}
+
+.nav-box p:hover {
+    color: white; /* Cambia al color deseado al pasar el cursor */
+}
+
+
+
+.envio-gratis {
+    width: 200px; /* Cambia el tamaño específico para esta imagen */
+    margin: 0.5rem; /* 5rem arriba y abajo, auto a los lados para centrar */
+cursor: pointer;
+}
+
+.ingresa-cuenta {
+    width: 150px; /* Cambia el tamaño específico para esta imagen, asegurate que sea un valor positivo */
+    margin: 1.5rem auto; /* 1rem arriba y abajo, auto a los lados para centrar */
+cursor: pointer;
+}
+.mas-500 {
+    width: 160px; /* Cambia el tamaño específico para esta imagen */
+    margin: 2.5rem 0;
+cursor: pointer;
+}
+
+.mas-vendidos {
+    width: 100px; /* Cambia el tamaño específico para esta imagen */
+    margin: 1.5rem 0;
+cursor: pointer;
+}
+
+
+
+ header {
+            background-color: black;
+    height: 80px; /* Altura fija del header */
+    display: flex; /* Usamos flexbox para el contenedor */
+    justify-content: space-between; /* Espacia los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    padding: 10px 20px; /* Espacio alrededor del contenido */
+        
+        }
+
+       .logo {
+            width: 150px; /* Cambia a la anchura deseada */
+    height: auto; /* Mantiene la proporción original de la imagen */
+    margin-top: -10px; /* Ajusta la separación desde la parte superior */
+    margin-bottom: -20px; /* Ajusta la separación desde la parte inferior */
+    max-width: 100%; /* Asegura que la imagen no sobrepase el contenedor */
+     margin-left: 20px; /* Mueve el elemento hacia la derecha */
+    margin-right: 20px; /* Mueve el elemento hacia la izquierda */
+    position: relative;
+   
+        }
+    .search-bar {
+    display: inline-block; /* Permite que ocupe solo el espacio necesario */
+    text-align: center; /* Alinea el contenido al centro */
+}
+
+.search-input {
+    width: 300px; /* Ancho fijo para la barra de búsqueda */
+    padding: 10px; /* Espacio interno */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 40px; /* Bordes redondeados */
+}
+
+.search-input:focus {
+    border-color: #007bff; /* Cambia el color del borde al hacer foco */
+    outline: none; /* Eliminar el borde de enfoque por defecto */
+}
+.categories {
+    margin-top: 0px; /* Reduce el espacio encima de los campos para que se alineen más cerca de la barra de búsqueda */
+    display: flex; /* Flexbox para alineación horizontal */
+    justify-content: center; /* Centra los elementos */
+    gap: 20px; /* Espacio entre los campos */
+	 position: relative;
+}
+
+.category {
+    cursor: pointer; /* Cambia el cursor al pasar sobre los campos */
+    color: white; /* Cambia el color del texto a blanco */
+	 padding: 0 5px; /* Espacio horizontal alrededor del texto */
+    border-right: 1px solid rgba(255, 255, 255, 0.5); /* Línea de separación */
+}
+
+.category a {
+    color: white; /* Color que deseas para el texto */
+    text-decoration: none; /* Elimina el subrayado */
+}
+
+.category:last-child {
+    border-right: none; /* Elimina la línea del último elemento */
+}
+
+.dropdown-menu {
+    position: absolute; /* Posiciona el menú desplegable */
+    top: 100%; /* Coloca el menú debajo del texto */
+    left: 0; /* Alinea el menú a la izquierda */
+    background-color: #5e676b; /* Color de fondo del menú */
+    border: 2px solid #5e676b; /* Cambia el grosor y el color del borde */
+    border-radius: 15px; /* Opcional: redondea las esquinas del borde */
+    z-index: 100; /* Asegúrate de que el menú esté por encima de otros elementos */
+    opacity: 0; /* Inicialmente transparente */
+    transform: translateY(-10px); /* Mueve el menú hacia arriba */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transición suave */
+    visibility: hidden; /* Oculta el menú inicialmente */
+}
+
+/* Clase para mostrar el menú */
+.dropdown-menu.show {
+    opacity: 1; /* Cambia a opaco */
+    visibility: visible; /* Asegúrate de que sea visible */
+    transform: translateY(0); /* Mueve el menú a su posición original */
+}
+
+
+.dropdown-item {
+    color: white; /* Color del texto de las opciones */
+    padding: 10px; /* Espacio alrededor de las opciones */
+    display: block; /* Hace que las opciones ocupen toda la línea */
+    cursor: pointer; /* Cambia el cursor al pasar sobre las opciones */
+}
+
+.dropdown-item:hover {
+    background-color: #444; /* Cambia el fondo al pasar el mouse */
+  border-radius: 10px; 
+}
+
+.arrow {
+    margin-left: 5px; /* Espacio entre el texto y la flecha */
+    display: inline-block; /* Para aplicar la transformación */
+    transition: transform 0.3s ease; /* Transición suave para la animación */
+}
+
+/* Clase para rotar la flecha cuando el menú está desplegado */
+.arrow.rotate {
+    transform: rotate(180deg); /* Rota la flecha 180 grados */
+}
+
+.overlay {
+    display: none; /* Oculta el overlay por defecto */
+    position: fixed; /* Fija el overlay en la pantalla */
+    top: 0; /* Alinea al top */
+    left: 0; /* Alinea a la izquierda */
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    background-color: rgba(0, 0, 0, 0.5); /* Color negro con opacidad */
+    z-index: 50; /* Debajo del menú, pero encima del contenido */
+    transition: opacity 0.3s ease; /* Transición suave */
+    opacity: 0; /* Inicialmente transparente */
+}
+
+/* Clase para mostrar el overlay */
+.overlay.show {
+    display: block; /* Muestra el overlay */
+    opacity: 1; /* Cambia a opaco */
+}
+
+
+.account {
+    display: flex; /* Usamos flexbox para facilitar la alineación */
+    justify-content: flex-end; /* Alinea todo a la derecha */
+    margin-right: 20px; /* Ajusta el margen derecho según sea necesario */
+}
+
+.create-account {
+    color: white; /* Color del texto */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el texto */
+    margin-left: 20px; /* Espacio a la izquierda del texto, si es necesario */
+    margin-top: 0px; /* Ajusta la separación vertical */
+}
+
+
+
+.payment-methods {
+    padding: 0.2rem; /* Espacio interno */
+    background-color: #f9f9f9; /* Color de fondo */
+    
+    border-radius: 0px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Sombra sutil */
+    max-width: 1300px; /* Ancho máximo */
+    margin: 20px auto; /* Centra el contenedor */
+ 
+}
+
+
+.payment-methods h2 {
+    text-align: center; /* Centra el texto */
+    padding-top: 0.0rem; /* Ajusta este valor para subir o bajar el texto */
+    font-size: 24px; /* Tamaño del texto */
+    color: #333; /* Color del texto */
+}
+
+.circles-container {
+    display: flex; /* Flexbox para alinear los círculos */
+    justify-content: space-around; /* Espacio entre los círculos */
+    margin-top: 2rem; /* Espacio superior */
+}
+
+.payment-options {
+    display: flex;
+    justify-content: space-around; /* Espacio entre los círculos */
+    flex-wrap: wrap; /* Permite que se ajusten en varias filas */
+    margin-top: 1rem; /* Espacio superior */
+}
+
+.payment-option {
+    text-align: center; /* Centra el texto debajo de cada círculo */
+}
+
+.circle {
+    width: 150px; /* Tamaño inicial del círculo */
+    height: 150px; /* Tamaño inicial del círculo */
+    border-radius: 50%; /* Hace el círculo redondo */
+    
+    background-color: #d0d8da; /* Color de fondo */
+    margin-bottom: 0.5rem; /* Espacio entre el círculo y el texto */
+    display: flex; /* Usamos flexbox para centrar la imagen */
+    justify-content: center; /* Centra la imagen horizontalmente */
+    align-items: center; /* Centra la imagen verticalmente */
+    transition: transform 0.2s ease; /* Transición suave para el cambio de tamaño */
+}
+
+.circle:hover {
+    transform: scale(1.1); /* Aumenta el tamaño del círculo al 110% */
+}
+
+
+
+.credit-card {
+    width: 180px; /* Cambia el tamaño para la tarjeta de crédito */
+    height: 80px;
+cursor: pointer;
+}
+
+.cash {
+    width: 180px; /* Cambia el tamaño para efectivo */
+    height: 100px;
+cursor: pointer;
+}
+
+.payment-months {
+    width: 100px; /* Cambia el tamaño para pago a meses */
+    height: 120px;
+cursor: pointer;
+}
+
+.gift-cards {
+    width: 150px; /* Cambia el tamaño para tarjetas de regalo */
+    height: 80px;
+cursor: pointer;
+}
+
+
+
+.container {
+    display: flex;
+    padding: 20px 20px 20px 20px;
+}
+
+
+.aside {
+    width: 350px;
+    padding: 20px 20px 20px 20px;
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-left: 0px;
+    margin-top: 0px; /* Añade margen superior */
+    margin-bottom: 20px; /* Añade margen inferior */
+    height: 560px;
+    display: flex;
+    flex-direction: column;
+}
+
+.aside-content {
+      width: 350px; /* Establece un ancho fijo */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espacio entre elementos */
+    overflow: auto; /* Permite el desplazamiento si el contenido es mayor que la altura */
+
+}
+
+.aside h2 {
+    margin-top: -10px; /* Ajusta este valor según sea necesario */
+}
+
+
+.offer-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ display: none; /* Esconde todos los productos por defecto */
+}
+
+.offer-item.active {
+    display: block; /* Solo muestra el producto activo */
+}
+.product-image {
+    width: 90%; /* Ajusta el ancho de la imagen */
+    max-width: 300px; /* Ancho máximo */
+    height: 247px; /* Mantiene la proporción */
+margin-bottom: 10px; /* Margen inferior */
+}
+
+.other-product-image {
+     width: 90%; /* Ajusta el ancho de la imagen */
+    max-width: 300px; /* Ancho máximo */
+    height: 247px; /* Mantiene la proporción */
+ margin-bottom: 10px; /* Margen inferior */
+}
+
+    
+.nintendo-image {
+    
+    max-width: 320px; /* Ancho máximo */
+    height: 240px; /* Mantiene la proporción */
+    margin-top: 0px; /* Margen superior */
+    margin-bottom: 17px; /* Margen inferior */
+    margin-left: 30px; /* Margen izquierdo */
+    margin-right: auto; /* Margen derecho */
+}
+
+.product-name {
+    font-size: 1.2rem; /* Tamaño del texto */
+    color: #333; /* Color por defecto */
+    margin: 10px 0; /* Espacio alrededor */
+    transition: color 0.3s; /* Transición suave para el color */
+}
+
+.product-name:hover {
+    color: #1f4f7c; /* Color al pasar el cursor */
+    cursor: pointer;
+}
+.price {
+    color: red; /* Color del precio en oferta */
+    font-size: 1.5rem; /* Tamaño del texto del precio */
+}
+
+.old-price {
+    text-decoration: line-through; /* Tachado del precio anterior */
+    color: #999; /* Color gris */
+}
+
+.discount {
+    font-size: 1rem;
+    color: #28a745; /* Color verde para el porcentaje */
+}
+
+.buy-now {
+    background-color: #1f4f7c; /* Color azul */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espacio interno */
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px; /* Espacio superior */
+    transition: background-color 0.3s; /* Transición suave */
+        width: 100%; 
+}
+
+.buy-now:hover {
+    background-color: white; /* Color más claro al pasar el ratón */
+    border: 2px solid #1f4f7c; /* Borde azul */
+    color: #1f4f7c; /* Texto azul */
+}
+
+.add-to-cart {
+    background-color:#1f4f7c; /* Color verde */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espacio interno */
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px; /* Espacio superior */
+    transition: background-color 0.3s; /* Transición suave */
+width: 100%;
+}
+
+.add-to-cart:hover {
+    background-color: white; /* Color más oscuro al pasar el ratón */
+    border: 2px solid #1f4f7c; /* Borde azul */
+    color: #1f4f7c; /* Texto verde */
+}
+
+.favorite-button {
+    position: absolute; /* Posicionamiento absoluto */
+    top: 10px; /* Ajusta según sea necesario */
+    right: 10px; /* Ajusta según sea necesario */
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    padding: 0; /* Sin padding */
+    transition: fill 0.3s; /* Transición suave para el color */
+    z-index: 10; /* Asegura que esté por encima de la imagen */
+}
+
+.favorite-button.active .heart-path {
+    fill: red; /* Color rojo cuando está activo */
+}
+
+.slider {
+    position: relative;
+    overflow: hidden; /* Esconde los productos que no están activos */
+}
+
+
+
+
+
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.prev {
+    left: 10px; /* Ajusta la posición del botón anterior */
+}
+
+.next {
+    right: 10px; /* Ajusta la posición del botón siguiente */
+}
+
+
+
+
+
+
+
+
+{
+    box-sizing: border-box; /* Esto aplica a todos los elementos */
+}
+
+
+.sections-container {
+     flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.additional-section {
+    padding: 20px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 100%; /* Cambiado a 100% */
+}
+
+.additional-section h2 {
+    margin: 0 0 5px 0; /* Ajustado */
+}
+
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan si no hay suficiente espacio */
+    gap: 20px; /* Espacio entre las tarjetas */
+    margin: 0 0px 0px 0px;
+    width: 100%; /* O establece un valor específico como 800px */
+    max-width: 400px; /* Ancho máximo del contenedor */
+    height: auto; /* Ajusta automáticamente según el contenido */
+    min-height: 200px; /* Altura mínima, ajusta según necesites */
+}
+
+
+.product-card {
+    flex: 1 1 calc(50% - 20px); /* Ajusta el tamaño de cada tarjeta, 50% del ancho del contenedor menos el espacio */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Estilo opcional para las tarjetas */
+    border-radius: 8px; /* Bordes redondeados opcionales */
+    overflow: hidden; /* Para que no se desborden los contenidos */
+    background-color: white; /* Fondo blanco */
+border: 2px solid #bdc3c7;
+}
+
+
+.image {
+    width: 120px;   
+    height: 120px; /* Mantiene la proporción */
+    margin-top: 0px; /* Margen superior */
+    margin-bottom: 0px; /* Margen inferior */
+    margin-left: 28px; /* Margen izquierdo */
+    margin-right: auto; /* Margen derecho */
+
+
+}
+
+
+.product-title {
+    font-size: 1rem; /* Tamaño del texto */
+     margin-top: 0px; /* Margen superior */
+    margin-bottom: 5px; /* Margen inferior */
+    margin-left: 5px; /* Margen izquierdo */
+    margin-right: 0px; /* Margen derecho */
+    color: #333; /* Color del texto */
+ margin-left: 10px; /* Margen izquierdo */
+}
+
+.previous-price {
+    text-decoration: line-through; /* Tachado del precio anterior */
+    color: #999; /* Color gris */
+font-size: 1rem; /* Tamaño del texto */
+ margin-left: 10px; /* Margen izquierdo */
+}
+
+.current-price {
+    color: red; /* Color del precio actual */
+    font-size: 1.4rem; /* Tamaño del texto del precio */
+ margin-bottom: 5px; /* Margen inferior */
+ margin-left: 10px; /* Margen izquierdo */
+}
+
+.discount-rate {
+    font-size: 0.8rem; /* Tamaño del texto del descuento */
+    color: #28a745; /* Color verde para el porcentaje */
+ margin: 1px 0;
+ margin-bottom: 5px; /* Margen inferior */
+ margin-left: 10px; /* Margen izquierdo */
+}
+
+.shipping-info {
+    margin: 1px 0; /* Espacio alrededor */
+font-size: 1rem;
+ margin-bottom: 5px; /* Margen inferior */
+ margin-left: 10px; /* Margen izquierdo */
+}
+
+
+
+
+
+
+
+
+
+
+
+.bestsellers-section {
+  padding: 20px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 100%; /* Cambiado a 100% */
+}
+.bestsellers-section h2 {
+    margin-top: -10px; /* Ajusta este valor según sea necesario */
+}
+
+
+
+
+
+
+
+    </style>
+
+
+
+
+</head>
+<body> 
+
+
+<header>
+    <a href="amazon.html">
+        <img src="imagenes/logo.png" alt="Logo de Amazon" class="logo">
+    </a>
+	 <div class="search-bar">
+            <input type="text" placeholder="Buscar..." class="search-input">
+        </div>
+        <div class="categories">
+	     <div id="overlay" class="overlay"></div>
+             <span class="category" id="category-toggle">Categorías <span class="arrow">▼</span></span>
+  <div class="dropdown-menu" id="dropdown">
+        <span class="dropdown-item">Electrónica</span>
+        <span class="dropdown-item">Ropa</span>
+        <span class="dropdown-item">Hogar</span>
+        <span class="dropdown-item">Libros</span>
+        <span class="dropdown-item">Juguetes</span>
+        <span class="dropdown-item">Belleza</span>
+        <span class="dropdown-item">Deportes</span>
+        <span class="dropdown-item">Alimentos</span>
+        <span class="dropdown-item">Automotriz</span>
+        <span class="dropdown-item">Ofertas Especiales</span>
+    </div>
+            <span class="category">Ofertas</span>
+            <span class="category">Historial</span>
+            <span class="category">Supermercado</span>
+            <span class="category">Moda</span>
+            <span class="category">Vender</span>
+            <span class="category">
+    <a href="pagina_atencion.html">Ayuda</a>
+</span>
+
+        </div>
+	  <span class="create-account">Crear cuenta</span>
+    
+
+
+
+
+</header>
+
+
+<div class="banner">
+    <h2>¡POR TIEMPO LIMITADO!</h2>
+    <p>LIQUIDACIÓN FULL</p>
+    <p>Envíos rápidos</p>
+    <button class="discount-button">Hasta 50% de Descuento</button>
+    <img src="imagenes/monitor.png" alt="Descripción de la imagen" class="banner-image">
+</div>
+
+
+
+
+
+
+<div class="navigation">
+    <div class="nav-box">
+        <h3>Envío Gratis</h3>
+        <img src="imagenes/Envio.png" alt="Envío Gratis" class="nav-image envio-gratis">
+        <p>Disfruta de envío gratis.</p>
+    </div>
+    <div class="nav-box">
+        <h3>Ingresa a tu cuenta</h3>
+        <img src="imagenes/Cuenta.png" alt="Ingresa a tu cuenta" class="nav-image ingresa-cuenta">
+        <p>Accede a tu historial de compras y preferencias.</p>
+    </div>
+    <div class="nav-box">
+        <h3>Menos de $500</h3>
+        <img src="imagenes/Dinero.png" alt="Más de $500" class="nav-image mas-500">
+        <p>Obtén descuentos especiales.</p>
+    </div>
+    <div class="nav-box">
+        <h3>Más Vendidos</h3>
+        <img src="imagenes/Vendido.png" alt="Más Vendidos" class="nav-image mas-vendidos">
+        <p>Descubre los productos más populares.</p>
+    </div>
+</div>
+
+
+
+
+
+
+<section class="payment-methods">
+    <h2>Descubre nuestros métodos de Pago</h2>
+    <div class="payment-options">
+        <div class="payment-option">
+            <div class="circle">
+                <img src="imagenes/credito.png" alt="Tarjeta de Crédito" class="circle-image credit-card">
+            </div>
+            <p>Tarjeta de Crédito</p>
+        </div>
+        <div class="payment-option">
+            <div class="circle">
+                <img src="imagenes/efectivo.png" alt="Efectivo" class="circle-image cash">
+            </div>
+            <p>Efectivo</p>
+        </div>
+        <div class="payment-option">
+            <div class="circle">
+                <img src="imagenes/calendario.png" alt="Pago a meses" class="circle-image payment-months">
+            </div>
+            <p>Pago a meses</p>
+        </div>
+        <div class="payment-option">
+            <div class="circle">
+                <img src="imagenes/regalo.png" alt="Tarjetas de regalo" class="circle-image gift-cards">
+            </div>
+            <p>Tarjetas de regalo</p>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<div class="container">
+
+<aside class="aside">
+    <h2>Ofertas del Día</h2>
+    <div class="aside-content">
+        <div class="slider">
+            <div class="offer-item active">
+                <img src="imagenes/consola.png" alt="PlayStation 5" class="product-image">
+                <button class="favorite-button"aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path class="heart-path" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="gray"/>
+                    </svg>
+                </button>
+                <div class="product-name">Play Station 5 1TB Estandar Blanco</div>
+                <div class="old-price">$499.99</div>
+                <div class="price">$399.99</div>
+                <div class="discount">20% de descuento</div>
+                <div>Envío gratis</div>
+                <button class="buy-now" onclick="buyNow()">Comprar Ahora</button>
+                <button class="add-to-cart">Agregar al carrito</button>
+            </div>
+            <div class="offer-item">
+                <img src="imagenes/xbox.png" alt="Xbox Series X" class="product-image other-product-image">
+                <button class="favorite-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path class="heart-path" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="gray"/>
+                    </svg>
+                </button>
+                <div class="product-name">Xbox Series X 1TB Estandar Negro</div>
+                <div class="old-price">$299.99</div>
+                <div class="price">$249.99</div>
+                <div class="discount">16% de descuento</div>
+                <div>Envío gratis</div>
+                <button class="buy-now">Comprar Ahora</button>
+                <button class="add-to-cart">Agregar al carrito</button>
+            </div>
+            <div class="offer-item">
+                <img src="imagenes/nintendo.png" alt="Nintendo Switch" class="product-image nintendo-image">
+                <button class="favorite-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path class="heart-path" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="gray"/>
+                    </svg>
+                </button>
+                <div class="product-name">Nintendo Switch 32GB</div>
+                <div class="old-price">$299.99</div>
+                <div class="price">$249.99</div>
+                <div class="discount">17% de descuento</div>
+                <div>Envío gratis</div>
+                <button class="buy-now">Comprar Ahora</button>
+                <button class="add-to-cart">Agregar al carrito</button>
+            </div>
+            <button class="slider-button prev">❮</button>
+            <button class="slider-button next">❯</button>
+        </div>
+    </div>
+
+
+
+
+</aside>
+
+
+  <div class="sections-container">
+    <section class="additional-section">
+        <h2>Ofertas</h2>
+<div class="product-container">
+           <div class="product-card">
+            <img src="imagenes/camara.png" alt="Cámara Fotográfica" class="image">
+            <button class="favorite-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path class="heart-path" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="gray"/>
+                    </svg>
+                </button>
+            <div class="product-title">Cámara Fotográfica DSLR 24MP</div>
+            <div class="previous-price">$799.99</div>
+            <div class="current-price">$599.99</div>
+            <div class="discount-rate">25% de descuento</div>
+            <div class="shipping-info">Envío gratis</div>
+            
+        </div>
+ <div class="product-card">
+                <img src="imagenes/laptop.png" alt="Laptop Gaming" class="image">
+                <button class="favorite-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path class="heart-path" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="gray"/>
+                    </svg>
+                </button>
+                <div class="product-title">Laptop Gaming 16GB RAM</div>
+                <div class="previous-price">$1299.99</div>
+                <div class="current-price">$999.99</div>
+                <div class="discount-rate">23% de descuento</div>
+                <div class="shipping-info">Envío gratis</div>
+            </div>
+ </div>
+    </section>
+
+
+
+    <section class="bestsellers-section">
+        <h2>Lo Más Vendido en Libros</h2>
+        <p></p>
+        <!-- Agrega productos de libros aquí -->
+    </section>
+</div>
+
+
+   
+
+
+    <script>
+       
+   const toggle = document.getElementById('category-toggle');
+const dropdown = document.getElementById('dropdown');
+const overlay = document.getElementById('overlay');
+const arrow = document.querySelector('.arrow');
+
+toggle.addEventListener('click', () => {
+    dropdown.classList.toggle('show'); // Muestra/oculta el menú
+    overlay.classList.toggle('show'); // Muestra/oculta el overlay
+    arrow.classList.toggle('rotate'); // Rota la flecha
+});
+
+// Cierra el menú y el overlay si se hace clic en el overlay
+overlay.addEventListener('click', () => {
+    dropdown.classList.remove('show');
+    overlay.classList.remove('show');
+    arrow.classList.remove('rotate');
+});
+
+const banner = document.querySelector('.banner');
+const colors = [
+    'linear-gradient(to top, rgba(240, 240, 240, 0.1), #3f77b0 70%)',
+    'linear-gradient(to top, rgba(240, 240, 240, 0.1), #1f546c 70%)',
+    'linear-gradient(to top, rgba(240, 240, 240, 0.1), #00796b 70%)',
+    'linear-gradient(to top, rgba(240, 240, 240, 0.1), #4caf50 70%)',
+    'linear-gradient(to top, rgba(240, 240, 240, 0.1), #ff9800 70%)'
+];
+
+let index = 0;
+
+setInterval(() => {
+    banner.style.background = colors[index];
+    index = (index + 1) % colors.length; // Cicla a través de los colores
+}, 3000); // Cambia cada 3 segundos
+
+
+
+
+
+document.querySelectorAll('.favorite-button').forEach(button => {
+    button.addEventListener('click', (event) => {
+        const productItem = event.target.closest('.offer-item');
+        const productName = productItem.querySelector('.product-name').innerText;
+
+        // Alterna la clase 'active'
+        button.classList.toggle('active');
+
+        // Actualiza el atributo aria-pressed
+        const isActive = button.classList.contains('active');
+        button.setAttribute('aria-pressed', isActive);
+
+        const favoriteEvent = new CustomEvent('productFavorited', { 
+            detail: { 
+                productName: productName 
+            } 
+        });
+        document.dispatchEvent(favoriteEvent);
+    });
+});
+
+
+
+
+
+
+
+
+
+
+const slider = document.querySelector('.aside .slider');
+const slides = slider.querySelectorAll('.offer-item');
+let currentSlide = 0;
+let sliderInterval;
+
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (i === index) {
+            slide.classList.add('active');
+        }
+    });
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}
+
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+}
+
+// Vincular los botones
+slider.querySelector('.next').addEventListener('click', nextSlide);
+slider.querySelector('.prev').addEventListener('click', prevSlide);
+
+// Inicializa el primer slide
+showSlide(currentSlide);
+
+// Función para iniciar el intervalo
+function startSlider() {
+    sliderInterval = setInterval(nextSlide, 3000); // Cambia automáticamente cada 3 segundos
+}
+
+// Función para detener el intervalo
+function stopSlider() {
+    clearInterval(sliderInterval);
+}
+
+// Inicia el slider al cargar
+startSlider();
+
+// Añadir eventos para pausar y reanudar el slider
+document.querySelector('.aside').addEventListener('mouseenter', stopSlider);
+document.querySelector('.aside').addEventListener('mouseleave', startSlider);
+
+
+
+const productSlider = document.querySelector('.product-slider');
+const nextButton = document.getElementById('slider-next');
+const prevButton = document.getElementById('slider-prev');
+
+nextButton.addEventListener('click', () => {
+    productSlider.scrollBy({ left: productSlider.clientWidth, behavior: 'smooth' });
+});
+
+prevButton.addEventListener('click', () => {
+    productSlider.scrollBy({ left: -productSlider.clientWidth, behavior: 'smooth' });
+});
+
+
+
+
+
+
+    </script>
+</body>
+</html>

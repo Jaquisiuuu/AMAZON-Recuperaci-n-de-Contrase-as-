@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Enlazando el archivo CSS -->
+    <title>Iniciar sesión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #a8e0f8, #f8b5b5);
+        }
+
+        header {
+            width: 100%;
+            height: 100px;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        main {
+            margin-top: 120px; /* Para evitar que el contenido quede detrás del encabezado */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        input {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 95%;
+            box-sizing: border-box;
+        }
+
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #357ae8;
+        }
+
+        .message {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #ff0000;
+        }
+
+        .terms-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .terms-container label {
+            color: #555;
+        }
+
+        .terms-container a {
+            color: #4285f4;
+            text-decoration: none;
+        }
+
+        .terms-container a:hover {
+            text-decoration: underline;
+        }
+
+        .loading-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #4285f4;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="background"></canvas>
+    <header>
+        <h1>Iniciar sesión en Amazon</h1>
+    </header>
+
+    <main>
+        <form id="login-form" onsubmit="loginUser(event)">
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" required>
+
+            <label for="password">Contraseña:</label>
+            <div class="password-container">
+                <input type="password" id="password" required>
+                <span class="toggle-password" onclick="togglePassword()"><i class="far fa-eye"></i></span>
+            </div>
+
+            <button type="submit">Iniciar sesión</button>
+
+            <div class="terms-container">
+                <label>
+                    <a href="recuperar-contraseña.html">¿Olvidaste tu contraseña?</a>
+                </label>
+            </div>
+        </form>
+
+        <div id="message" class="message"></div>
+
+        <div class="terms-container">
+            <label>
+                ¿No tienes cuenta? <a href="register.html">Crear una cuenta</a>
+            </label>
+        </div>
+    </main>
+
+    <div id="loading-message" class="loading-message" style="display: none;">
+        <div class="spinner"></div>
+        <p>Iniciando sesión...</p>
+    </div>
+
+    <script>
+        // Función para mostrar/ocultar la contraseña
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const passwordIcon = document.querySelector('.toggle-password i');
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                passwordIcon.className = "fas fa-eye-slash"; // Cambiar ícono a ojo cerrado
+            } else {
+                passwordField.type = "password";
+                passwordIcon.className = "far fa-eye"; // Cambiar ícono a ojo abierto
+            }
+        }
+
+        // Función para iniciar sesión
+        function loginUser(event) {
+            event.preventDefault(); // Evita que el formulario se envíe automáticamente
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Obtener los datos guardados en el almacenamiento local
+            const storedEmail = localStorage.getItem('userEmail');
+            const storedPassword = localStorage.getItem('userPassword');
+
+            // Validar las credenciales del usuario
+            if (email === storedEmail && password === storedPassword) {
+                // Si las credenciales son correctas, redirige al usuario
+                window.location.href = 'datatable.html';
+            } else {
+                // Si las credenciales son incorrectas, mostrar un mensaje de error
+                document.getElementById('message').innerText = "Correo o contraseña incorrectos.";
+                document.getElementById('message').style.color = "red"; // Mostrar mensaje en rojo
+            }
+        }
+    </script>
+</body>
+</html>

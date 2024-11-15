@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Contraseña</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+        }
+
+        main {
+            margin-top: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        input {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 95%;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #357ae8;
+        }
+
+        .message {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .password-strength {
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .weak {
+            color: red;
+        }
+
+        .medium {
+            color: orange;
+        }
+
+        .strong {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <form id="reset-password-form" onsubmit="resetPassword(event)">
+            <label for="new-password">Nueva Contraseña:</label>
+            <input type="password" id="new-password" required placeholder="Ingresa nueva contraseña" oninput="checkPasswordStrength()">
+
+            <label for="confirm-password">Confirmar Contraseña:</label>
+            <input type="password" id="confirm-password" required placeholder="Confirma tu contraseña">
+
+            <div id="password-strength" class="password-strength"></div>
+
+            <button type="submit">Cambiar Contraseña</button>
+
+            <div id="message" class="message"></div>
+        </form>
+    </main>
+
+    <script>
+        // Función para verificar la fuerza de la contraseña
+        function checkPasswordStrength() {
+            const password = document.getElementById('new-password').value;
+            const strengthElement = document.getElementById('password-strength');
+            let strength = 'Débil';
+
+            if (password.length >= 8 && /[A-Z]/.test(password) && /[0-9]/.test(password)) {
+                strength = 'Fuerte';
+                strengthElement.className = 'strong';
+            } else if (password.length >= 6) {
+                strength = 'Media';
+                strengthElement.className = 'medium';
+            } else {
+                strength = 'Débil';
+                strengthElement.className = 'weak';
+            }
+
+            strengthElement.innerText = `Fuerza de la contraseña: ${strength}`;
+        }
+
+        // Función para cambiar la contraseña
+        function resetPassword(event) {
+            event.preventDefault();
+
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const messageElement = document.getElementById('message');
+
+            // Verificar si las contraseñas coinciden
+            if (newPassword !== confirmPassword) {
+                messageElement.innerText = "Las contraseñas no coinciden.";
+                messageElement.style.color = "red";
+                return;
+            }
+
+            // Validar la fuerza de la contraseña
+            if (newPassword.length < 6) {
+                messageElement.innerText = "La contraseña debe tener al menos 6 caracteres.";
+                messageElement.style.color = "red";
+                return;
+            }
+
+            // Guardar la nueva contraseña en localStorage
+            localStorage.setItem('userPassword', newPassword);
+
+            // Mostrar mensaje de éxito
+            messageElement.innerText = "Contraseña cambiada con éxito.";
+            messageElement.style.color = "green";
+
+            // Redirigir después de un breve retraso
+            setTimeout(() => {
+                window.location.href = 'login.html';  // Redirige a la página de inicio de sesión
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

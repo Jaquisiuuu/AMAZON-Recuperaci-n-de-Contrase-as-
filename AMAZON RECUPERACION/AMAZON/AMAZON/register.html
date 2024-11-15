@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilo global */
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #dce2e3; /* Color lavanda suave */
+            font-family: 'Roboto', sans-serif;
+        }
+
+        header {
+            width: 100%;
+            height: 80px;
+            background-color: #1a202c; /* Color oscuro */
+            color: white;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        header img {
+            width: 150px;
+            cursor: pointer;
+            margin-top: -30px;
+        }
+
+        main {
+            margin-top: 120px;
+            padding-left: 30px;  /* Espaciado desde la izquierda */
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            margin: 0;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;  /* Máximo ancho de formulario */
+            box-sizing: border-box;
+            transition: all 0.3s ease-in-out;
+        }
+
+        form:hover {
+            transform: scale(1.03);
+        }
+
+        label {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        input, select {
+            padding: 12px;
+            margin-top: 8px;
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 1.2em;
+            color: #888;
+        }
+
+        .strength-bar {
+            height: 4px;
+            border-radius: 4px;
+            margin-top: 8px;
+            width: 100%;
+            background-color: #ddd;
+            transition: width 0.5s ease, background-color 0.5s ease;
+        }
+
+        .password-hint, .strength-hint, .mismatch-hint {
+            color: #ff4c4c;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .terms-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .terms-container label {
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 8px;
+            transform: scale(1.3);
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .reg-message {
+            background-color: #27ae60;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            text-align: center;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            max-width: 400px;
+            width: 80%;
+            animation: slideIn 1s ease-out;
+        }
+
+        .reg-message i {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        @keyframes slideIn {
+            0% { transform: translate(-50%, -60%); opacity: 0; }
+            100% { transform: translate(-50%, -50%); opacity: 1; }
+        }
+
+        .loading-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            display: none;
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            main {
+                margin-top: 80px;
+                padding-left: 20px;
+            }
+
+            form {
+                padding: 30px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="amazon.html">
+            <img src="imagenes/logo.png" alt="Logo de Amazon">
+        </a>
+    </header>
+
+    <main>
+        <h2>Crear Cuenta</h2>
+        <form id="register-form">
+            <label for="reg-email">Correo electrónico:</label>
+            <input type="email" id="reg-email" required>
+
+            <label for="reg-password" class="password-label">Contraseña:</label>
+            <div class="password-container">
+                <input type="password" id="reg-password" required>
+                <span class="toggle-password" onclick="togglePassword('reg-password')"><i class="far fa-eye"></i></span>
+            </div>
+
+            <div class="strength-bar" id="strength-bar"></div>
+            <div class="password-hint" id="password-hint">La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial.</div>
+            <div class="strength-hint" id="strength-hint">Por favor, elige una contraseña más segura.</div>
+
+            <label for="reg-password-confirm" class="password-label">Confirmar Contraseña:</label>
+            <div class="password-container">
+                <input type="password" id="reg-password-confirm" required>
+                <span class="toggle-password" onclick="togglePassword('reg-password-confirm')"><i class="far fa-eye"></i></span>
+            </div>
+
+            <div class="mismatch-hint" id="mismatch-hint">Las contraseñas no coinciden.</div>
+
+            <label for="security-question">Pregunta de seguridad (elige una):</label>
+            <select id="security-question" required>
+                <option value="mascota">¿Cuál es el nombre de tu primera mascota?</option>
+                <option value="ciudad">¿En qué ciudad naciste?</option>
+                <option value="madre">¿Cuál es el nombre de tu madre de soltera?</option>
+                <option value="pelicula">¿Cuál es tu película favorita?</option>
+                <option value="escuela">¿En qué escuela secundaria estudiaste?</option>
+            </select>
+
+            <label for="security-answer">Respuesta a la pregunta:</label>
+            <input type="text" id="security-answer" required>
+
+            <div class="terms-container">
+                <label>
+                    <input type="checkbox" required> Acepto los <a href="terminos.html" target="_blank">términos y condiciones</a>.
+                </label>
+            </div>
+
+            <button type="submit">Registrar</button>
+        </form>
+
+        <div id="reg-message"></div>
+    </main>
+
+    <div id="loading-message" class="loading-message">
+        <div class="spinner"></div>
+        <p>Registrando usuario...</p>
+    </div>
+
+    <div id="success-message" class="reg-message" style="display: none;">
+        <i class="far fa-check-circle"></i> Usuario registrado exitosamente. 
+        <div id="countdown">3</div>
+    </div>
+
+    <script>
+        // Toggle visibility of password
+        function togglePassword(id) {
+            const passwordField = document.getElementById(id);
+            const type = passwordField.type === "password" ? "text" : "password";
+            passwordField.type = type;
+
+            const icon = document.querySelector(`#${id} + .toggle-password i`);
+            icon.className = type === "password" ? "far fa-eye" : "far fa-eye-slash";
+        }
+
+        // Check password strength
+        function getPasswordStrength(password) {
+            let strength = 0;
+            if (password.length >= 3) strength++;
+            if (password.length >= 8) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[a-z]/.test(password)) strength++;
+            if (/\d/.test(password)) strength++;
+            if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength++;
+            return strength;
+        }
+
+        document.getElementById('reg-password').addEventListener('input', function() {
+            const password = this.value;
+            const strength = getPasswordStrength(password);
+            const strengthBar = document.getElementById('strength-bar');
+            const passwordHint = document.getElementById('password-hint');
+            const strengthHint = document.getElementById('strength-hint');
+
+            if (password.length < 3) {
+                strengthBar.style.width = '20%';
+                strengthBar.style.backgroundColor = 'red';
+                passwordHint.style.display = 'block';
+                strengthHint.style.display = 'block';
+            } else if (strength < 3) {
+                strengthBar.style.width = '50%';
+                strengthBar.style.backgroundColor = 'orange';
+                passwordHint.style.display = 'block';
+                strengthHint.style.display = 'block';
+            } else {
+                strengthBar.style.width = '100%';
+                strengthBar.style.backgroundColor = 'green';
+                passwordHint.style.display = 'none';
+                strengthHint.style.display = 'none';
+            }
+        });
+
+        // Register user
+        document.getElementById('register-form').onsubmit = function(event) {
+            event.preventDefault();  // Prevent form submission
+
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('reg-password-confirm').value;
+            const securityQuestion = document.getElementById('security-question').value;
+            const securityAnswer = document.getElementById('security-answer').value;
+
+            if (password !== confirmPassword) {
+                document.getElementById('mismatch-hint').style.display = 'block';
+                return;
+            }
+
+            document.querySelector('header').style.display = 'none';
+            document.querySelector('main').style.display = 'none';
+            const loadingMessage = document.getElementById('loading-message');
+            loadingMessage.style.display = 'block';
+
+            setTimeout(() => {
+                if (securityAnswer === password) {
+                    alert("La respuesta no puede ser igual a la contraseña.");
+                    loadingMessage.style.display = 'none';
+                    return;
+                }
+
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userPassword', password);
+                localStorage.setItem('userSecurityQuestion', securityQuestion);
+                localStorage.setItem('userSecurityAnswer', securityAnswer);
+
+                loadingMessage.style.display = 'none';
+                const regMessage = document.getElementById('success-message');
+                regMessage.style.display = 'block';
+
+                let countdownValue = 3;
+                const countdown = document.getElementById('countdown');
+                const interval = setInterval(() => {
+                    countdownValue--;
+                    countdown.textContent = countdownValue;
+                    if (countdownValue === 0) {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            window.location.href = 'login.html';  // Redirect after 3 seconds
+                        }, 500);
+                    }
+                }, 1000);
+            }, 3000);  // Simulate registration delay
+        }
+    </script>
+
+</body>
+</html>

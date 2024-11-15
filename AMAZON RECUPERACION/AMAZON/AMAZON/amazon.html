@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página de ejemplo con encabezado fijo, banner, ofertas y una sección de bienvenida.">
+    <title>Amazon</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #fff;
+            --text-color-light: #fff;
+            --text-color-dark: #333;
+            --border-color: #007bff;
+            --background-color: #f0f0f0;
+            --banner-height: 400px;
+            --welcome-bg-color: #e3e2e2;
+            --welcome-text-color: #333;
+            --welcome-shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            font-family: 'Roboto', sans-serif;
+        }
+
+     header {
+    width: 100%;
+    background-color: black;
+    border: 2px solid black;
+    padding: 20px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex; /* Cambiado a flex */
+    justify-content: space-between; /* Alinea elementos en extremos opuestos */
+    align-items: center; /* Centra verticalmente los elementos */
+}
+
+h1 {
+    color: var(--text-color-light);
+    margin: 0;
+    font-size: 2rem;
+ 
+  transform: translateX(500%); /* Ajusta el h1 para que esté realmente centrado */
+
+}
+
+.auth-links {
+    display: flex; /* Asegura que los enlaces estén en línea */
+}
+
+.auth-links a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+        .banner {
+            position: relative;
+            width: 100%;
+            height: var(--banner-height);
+            background-image: url('Banner.png');
+            background-size: cover;
+            background-position: center;
+            color: var(--text-color-light);
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 1rem;
+            overflow: hidden;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .text-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .text-container p {
+            font-size: 2.5rem;
+            margin: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .button-container {
+            position: relative;
+            z-index: 2;
+            margin-top: 1rem;
+        }
+
+        .banner button {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            border: 2px solid var(--border-color);
+            padding: 0.625rem 1.25rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .banner button:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .welcome {
+            width: 100%;
+            background-color: var(--welcome-bg-color);
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-sizing: border-box;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: 0 4px 8px var(--welcome-shadow);
+            color: var(--welcome-text-color);
+        }
+
+        .welcome h2 {
+            color: var(--text-color-dark);
+            margin-bottom: 1.25rem;
+            font-size: 1.75rem;
+        }
+
+        .welcome p {
+            color: var(--welcome-text-color);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .offers {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 2rem;
+            box-sizing: border-box;
+            margin-top: 2rem;
+        }
+
+        .offer {
+            flex: 1 1 350px;
+            margin: 1rem;
+            box-sizing: border-box;
+            overflow: hidden;
+            max-width: 350px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .offer img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .offer:hover img {
+            transform: scale(1.05);
+        }
+
+        .offer h3 {
+            margin: 0.625rem 0;
+            color: var(--text-color-dark);
+            font-size: 1.25rem;
+        }
+
+        .offer .description {
+            margin: 0.625rem 0;
+            color: var(--text-color-dark);
+            font-size: 1rem;
+        }
+
+        .offer .more-info button {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            border: 2px solid var(--border-color);
+            padding: 0.625rem 1.25rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .offer .more-info button:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .offers {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .scroll-to-top:hover {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            background-color: var(--background-color);
+            color: var(--text-color-dark);
+            text-align: center;
+            padding: 1rem;
+            border-top: 1px solid var(--text-color-dark);
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+      <header>
+        <h1>Amazon</h1>
+        <div class="auth-links">
+             <a href="login.html">Iniciar sesión</a>
+            <a href="register.html">Crear cuenta</a>
+        </div>
+    </header>
+    <div class="banner">
+        <div class="banner-overlay"></div>
+        <div class="text-container">
+            <p id="banner-text">Las mejores compras en línea</p>
+        </div>
+        <div class="button-container">
+            <button>Comprar ahora</button>
+        </div>
+    </div>
+    <div class="welcome">
+        <h2>Bienvenido a Amazon</h2>
+        <p>En Amazon, nos dedicamos a ofrecerte una experiencia de compras en línea, segura, rápida y efectiva. Llevamos productos de calidad directamente a tu puerta.</p>
+    </div>
+    
+    <div class="offers"> <!-- Contenedor para ofertas -->
+        <div class="offer">
+            <img src="imagenes/compras.jpg" alt="Compras en línea">
+            <h3>Compras en línea</h3>
+            <div class="description">Amplia variedad de productos, precios y una experiencia de compra segura y fácil.</div>
+            <div class="more-info">
+                <a href="datatable.html">
+                    <button>Más información</button>
+                </a>
+            </div>
+        </div>
+        <div class="offer">
+            <img src="imagenes/Novedades.jpg" alt="Novedades">
+            <h3>Novedades</h3>
+            <div class="description">Descubre todo lo nuevo en ofertas y mucho más. Y disfruta de los beneficios con los que contamos.</div>
+            <div class="more-info">
+                <a href="novedades.html"> <!-- Asegúrate de crear esta página -->
+                    <button>Más información</button>
+                </a>
+            </div>
+        </div>
+        <div class="offer">
+    <img src="imagenes/Servicio.jpg" alt="Atención al cliente">
+    <h3>Atención al cliente</h3>
+    <div class="description">Soporte personalizado, atención rápida y soluciones efectivas para todas tus consultas.</div>
+    <div class="more-info">
+        <a href="pagina_atencion.html"> <!-- Cambia "pagina_atencion.html" al nombre de tu nueva página -->
+            <button>Más información</button>
+        </a>
+    </div>
+</div>
+
+    </div>
+
+    <button class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+        <i class="fas fa-home"></i>
+    </button>
+
+    <footer>
+        <p>&copy; 2024 Amazon. Todos los derechos reservados.</p>
+        <p><a href="#">Política de privacidad</a> | <a href="#">Términos de servicio</a></p>
+    </footer>
+
+    <script>
+        // Array de mensajes para el banner
+        const messages = [
+            "Las mejores compras en línea",
+            "Encuentra ofertas increíbles en Amazon",
+            "Descubre productos únicos en Amazon",
+            "Compra con confianza en Amazon",
+            "¡Nuevas ofertas disponibles ahora!",
+            "Explora categorías y ahorra más",
+            "¡Compra hoy y recibe en 24 horas!"
+        ];
+
+        let currentMessageIndex = 0;
+
+        // Función para cambiar el mensaje del banner
+        function changeBannerMessage() {
+            const bannerText = document.getElementById('banner-text');
+            bannerText.style.opacity = 0; // Desvanece el texto actual
+            setTimeout(() => {
+                bannerText.textContent = messages[currentMessageIndex];
+                bannerText.style.opacity = 1; // Aparece el nuevo texto
+                currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+            }, 1000); // Tiempo de espera para que el texto se desvanezca
+        }
+
+        // Cambiar el mensaje cada 3 segundos
+        setInterval(changeBannerMessage, 3000);
+
+        // Inicializar con el primer mensaje
+        changeBannerMessage();
+    </script>
+</body>
+</html>

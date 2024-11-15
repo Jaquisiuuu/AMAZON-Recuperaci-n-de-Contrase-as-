@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página de atención al cliente de Amazon.">
+    <title>Atención al Cliente - Amazon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        :root {
+            --primary-color: #003366; /* Azul oscuro */
+            --highlight-color: #3770e0; /* Azul específico */
+            --text-color-light: #ffffff;
+            --text-color-dark: #000000; /* Color negro */
+            --background-color: #f0f0f0; /* Fondo claro */
+            --card-bg-color: #ffffff; /* Fondo de las tarjetas */
+            --header-bg-color: #000000; /* Negro para el header */
+            --shadow-color: rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        header {
+            width: 100%;
+            background-color: var(--header-bg-color); /* Cambiado a negro */
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        h1 {
+            color: var(--text-color-light);
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .container {
+            padding: 100px 1rem 1rem; /* Ajuste por el header fijo */
+            text-align: center;
+        }
+
+        .welcome {
+            max-width: 1100px; /* Ancho máximo de los contenedores */
+            width: 90%; /* Ancho responsivo */
+            background-color: var(--card-bg-color);
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-sizing: border-box;
+            margin: 0 auto 2rem; /* Centrado automático */
+            box-shadow: 0 2px 4px var(--shadow-color);
+            color: var(--text-color-dark); /* Texto en negro */
+            text-align: left; /* Alineación del texto a la izquierda */
+        }
+
+        .welcome h2 {
+            margin-bottom: 1.25rem;
+            font-size: 1.75rem;
+        }
+
+        .search-container {
+            display: flex;
+            margin-top: 1rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .search-button {
+            padding: 0.5rem 1rem;
+            margin-left: 0.5rem;
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #3770e0; /* Color de fondo al pasar el cursor */
+        }
+
+        .faq, .services {
+            max-width: 1100px; /* Ancho máximo de los contenedores */
+            width: 90%; /* Ancho responsivo */
+            background-color: var(--card-bg-color);
+            border-radius: 8px;
+            padding: 1rem; /* Reducido el padding para menor altura */
+            box-sizing: border-box;
+            margin: 0 auto 1rem; /* Reducido el margin inferior para estar más cerca */
+            box-shadow: 0 2px 4px var(--shadow-color);
+            color: var(--text-color-dark); /* Texto en negro */
+            text-align: left; /* Alineación del texto a la izquierda */
+        }
+
+        .faq h3, .services h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .faq p, .services p {
+            line-height: 1.6;
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        /* Cambia el color solo al texto de las preguntas y servicios */
+        .faq p strong:hover, .services p:hover {
+            color: var(--highlight-color); /* Cambia al color deseado */
+        }
+
+        footer {
+            background-color: var(--background-color);
+            color: var(--text-color-dark);
+            text-align: center;
+            padding: 1rem;
+            border-top: 1px solid var(--text-color-dark);
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+       <a href="amazon.html"><h1>Amazon</h1></a>
+
+    </header>
+    <div class="container">
+        <div class="welcome">
+            <h2>¿Con qué podemos ayudarte?</h2>
+            <div class="search-container">
+                <input type="text" placeholder="Escribe aquí tu consulta..." class="search-input">
+                <button class="search-button">Buscar</button>
+            </div>
+        </div>
+
+        <div class="services">
+            <h3>Administrar y Cancelar Compras</h3>
+            <p>Pagar, seguir envíos, modificar, reclamar o cancelar compras.</p>
+        </div>
+
+        <div class="services">
+            <h3>Devoluciones y Reembolsos</h3>
+            <p>Devolver un producto o consultar por reintegros de dinero de una compra.</p>
+        </div>
+
+        <div class="faq">
+            <h3>Preguntas Frecuentes sobre Compras</h3>
+            
+            <p><strong>1. ¿Cómo puedo realizar un pedido?</strong></p>
+            <p style="display: none;">Para realizar un pedido, simplemente navega por nuestro catálogo, selecciona el producto que deseas y haz clic en "Comprar ahora".</p>
+
+            <p><strong>2. ¿Qué métodos de pago aceptan?</strong></p>
+            <p style="display: none;">Aceptamos tarjetas de crédito, débito y PayPal. También puedes utilizar tarjetas de regalo de Amazon.</p>
+
+            <p><strong>3. ¿Cómo puedo rastrear mi pedido?</strong></p>
+            <p style="display: none;">Después de realizar tu pedido, recibirás un correo electrónico con un enlace para rastrear tu envío.</p>
+
+            <p><strong>4. ¿Qué debo hacer si tengo un problema con mi pedido?</strong></p>
+            <p style="display: none;">Si tienes un problema, visita nuestra sección de "Ayuda" o contacta con nuestro servicio al cliente a través de la página de contacto.</p>
+        </div>
+
+        <div class="services">
+            <h3>Ayuda sobre tu Cuenta</h3>
+            <p>Configuración de mi cuenta.</p>
+            <p>Seguridad y acceso a la cuenta.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Amazon. Todos los derechos reservados.</p>
+        <p><a href="#">Política de privacidad</a> | <a href="#">Términos de servicio</a></p>
+    </footer>
+
+    <script>
+        // Selecciona todas las preguntas (los párrafos que contienen las preguntas)
+        const faqQuestions = document.querySelectorAll('.faq p strong');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                // Obtiene el siguiente elemento hermano (la respuesta)
+                const nextElement = this.parentElement.nextElementSibling;
+                // Alterna la visibilidad de la respuesta
+                if (nextElement.style.display === 'none' || nextElement.style.display === '') {
+                    nextElement.style.display = 'block'; // Muestra la respuesta
+                } else {
+                    nextElement.style.display = 'none'; // Oculta la respuesta
+                }
+            });
+        });
+    </script>
+</body>
+</html>
